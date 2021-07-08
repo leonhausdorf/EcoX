@@ -2,33 +2,31 @@ package de.zevyx.ecox.configs;
 
 import de.zevyx.ecox.EcoX;
 import de.zevyx.ecox.api.EcoXAPI;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
 
-public class SettingsConfig {
+public class MoneyConfig {
 
     private File file;
     private YamlConfiguration cfg;
 
-    public SettingsConfig() {
-        this.file = new File("plugins/EcoX", "settings.yml");
+    public MoneyConfig() {
+        this.file = new File("plugins/EcoX", "money.yml");
         this.cfg = YamlConfiguration.loadConfiguration(file);
     }
 
     public void initializeDefault() {
-        if(!EcoX.getInstance().getDataFolder().exists())
-            EcoX.getInstance().getDataFolder().mkdirs();
         if(!file.exists()) {
-            try {
-                file.createNewFile();
+            if(EcoX.getInstance().getSettingsConfig().wantsFile()) {
+                try {
+                    file.createNewFile();
 
-                setValue("autoupdate", true);
-                setValue("storage", "file");
-            } catch (IOException ex) {
-                EcoXAPI.getAPI().getPluginUtils().sendStackTrace(ex);
+
+                } catch (IOException ex) {
+                    EcoXAPI.getAPI().getPluginUtils().sendStackTrace(ex);
+                }
             }
         }
     }
@@ -58,10 +56,5 @@ public class SettingsConfig {
     public Object getValue(String path) {
         return getConfig().get(path);
     }
-
-    public Boolean wantsFile() {
-        return getValue("storage") == "file";
-    }
-
 
 }
