@@ -1,0 +1,5 @@
+de\zevyx\ecox\api\EcoXAPI.class
+de\zevyx\ecox\configs\SettingsConfig.class
+de\zevyx\ecox\EcoX.class
+de\zevyx\ecox\api\utils\PluginUtils.class
+de\zevyx\ecox\api\utils\ItemAPI.class
