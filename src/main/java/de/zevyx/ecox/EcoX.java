@@ -1,6 +1,7 @@
 package de.zevyx.ecox;
 
 import de.zevyx.ecox.api.EcoXAPI;
+import de.zevyx.ecox.configs.DatabaseConfig;
 import de.zevyx.ecox.configs.MoneyConfig;
 import de.zevyx.ecox.configs.SettingsConfig;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -12,6 +13,7 @@ public class EcoX extends JavaPlugin {
 
     private SettingsConfig settingsConfig;
     private MoneyConfig moneyConfig;
+    private DatabaseConfig databaseConfig;
 
     @Override
     public void onLoad() {
@@ -25,9 +27,11 @@ public class EcoX extends JavaPlugin {
         this.api = new EcoXAPI();
         this.settingsConfig = new SettingsConfig();
         this.moneyConfig = new MoneyConfig();
+        this.databaseConfig = new DatabaseConfig();
 
         getSettingsConfig().initializeDefault();
         getMoneyConfig().initializeDefault();
+        getDatabaseConfig().initializeDefault();
     }
 
     @Override
@@ -46,6 +50,10 @@ public class EcoX extends JavaPlugin {
 
     public MoneyConfig getMoneyConfig() {
         return moneyConfig;
+    }
+
+    public DatabaseConfig getDatabaseConfig() {
+        return databaseConfig;
     }
 
     public EcoXAPI getAPI() {

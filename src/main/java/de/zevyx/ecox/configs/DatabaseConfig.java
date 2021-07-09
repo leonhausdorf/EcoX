@@ -2,33 +2,36 @@ package de.zevyx.ecox.configs;
 
 import de.zevyx.ecox.EcoX;
 import de.zevyx.ecox.api.EcoXAPI;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
 
-public class SettingsConfig {
+public class DatabaseConfig {
 
     private File file;
     private YamlConfiguration cfg;
 
-    public SettingsConfig() {
-        this.file = new File("plugins/EcoX", "settings.yml");
+    public DatabaseConfig() {
+        this.file = new File("plugins/EcoX", "database.yml");
         this.cfg = YamlConfiguration.loadConfiguration(file);
     }
 
     public void initializeDefault() {
-        if(!EcoX.getInstance().getDataFolder().exists())
-            EcoX.getInstance().getDataFolder().mkdirs();
         if(!file.exists()) {
-            try {
-                file.createNewFile();
+            if(EcoX.getInstance().getSettingsConfig().wantsDatabase()) {
+                try {
+                    file.createNewFile();
 
-                setValue("autoupdate", true);
-                setValue("storage", "file");
-            } catch (IOException ex) {
-                EcoXAPI.getAPI().getPluginUtils().sendStackTrace(ex);
+                    setValue("mysql.host", "127.0.0.1");
+                    setValue("mysql.port", 3306);
+                    setValue("mysql.database", "ecox");
+                    setValue("mysql.user", "ecox");
+                    setValue("mysql.password", "password");
+
+                } catch (IOException ex) {
+                    EcoXAPI.getAPI().getPluginUtils().sendStackTrace(ex);
+                }
             }
         }
     }
@@ -58,14 +61,5 @@ public class SettingsConfig {
     public Object getValue(String path) {
         return getConfig().get(path);
     }
-
-    public Boolean wantsFile() {
-        return getValue("storage") == "file";
-    }
-
-    public Boolean wantsDatabase() {
-        return getValue("storage") == "database";
-    }
-
 
 }
