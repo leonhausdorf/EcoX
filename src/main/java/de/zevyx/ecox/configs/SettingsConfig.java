@@ -27,6 +27,9 @@ public class SettingsConfig {
 
                 setValue("autoupdate", true);
                 setValue("storage", "file");
+
+
+                setValue("messages.prefix", "");
             } catch (IOException ex) {
                 EcoXAPI.getAPI().getPluginUtils().sendStackTrace(ex);
             }
