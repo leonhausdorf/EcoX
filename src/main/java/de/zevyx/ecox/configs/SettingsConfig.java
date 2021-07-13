@@ -34,6 +34,9 @@ public class SettingsConfig {
                 setValue("messages.currency", "Coins");
                 setValue("messages.noperms", "You don't have enough permissions to execute this command.");
                 setValue("messages.notexists", "The Player &b%p% &fdoes not exists.");
+                setValue("messages.moneyset", "You set the money from &b%p% &fto &b%a%&f.");
+                setValue("messages.moneyadd", "You gave &b%a% &f to &b%p%&f.");
+                setValue("messages.moneyremove", "You removed &b%a% &ffrom &b%p%&f.");
             } catch (IOException ex) {
                 EcoXAPI.getAPI().getPluginUtils().sendStackTrace(ex);
             }
