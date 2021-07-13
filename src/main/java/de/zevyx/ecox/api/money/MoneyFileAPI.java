@@ -8,29 +8,17 @@ import java.util.Date;
 
 public class MoneyFileAPI {
 
-    public boolean userExists(Player p) {
-        return EcoX.getInstance().getMoneyConfig().getConfig().contains(p.getUniqueId().toString());
-    }
-
-    public boolean userExistsByName(String name) {
-        return EcoX.getInstance().getMoneyConfig().getConfig().contains(name);
-    }
-
-    public boolean userExistsByUUID(String uuid) {
-        return EcoX.getInstance().getMoneyConfig().getConfig().contains(uuid);
+    public boolean userExists(String name) {
+        return EcoX.getInstance().getMoneyConfig().exists(name);
     }
 
     public void initiateUser(Player p) {
-        Date now = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 
-        EcoX.getInstance().getMoneyConfig().setValue(p.getName() + ".uuid", p.getUniqueId().toString());
-        EcoX.getInstance().getMoneyConfig().setValue(p.getName() + ".money", 0);
-        EcoX.getInstance().getMoneyConfig().setValue(p.getName() + ".firsttransaction", format.format(now));
+        EcoX.getInstance().getMoneyConfig().setValue(p.getName() + ".balance", 0);
     }
 
     public void setMoney(String name, Integer amount) {
-        EcoX.getInstance().getMoneyConfig().setValue(name + ".money", amount);
+        EcoX.getInstance().getMoneyConfig().setValue(name + ".balance", amount);
     }
 
     public void addMoney(String name, Integer amount) {
@@ -49,7 +37,7 @@ public class MoneyFileAPI {
     }
 
     public Integer getMoney(String name) {
-        return (Integer) EcoX.getInstance().getMoneyConfig().getValue(name + ".money");
+        return (Integer) EcoX.getInstance().getMoneyConfig().getValue(name + ".balance");
     }
 
 

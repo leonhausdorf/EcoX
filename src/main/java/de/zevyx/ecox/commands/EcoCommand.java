@@ -2,6 +2,7 @@ package de.zevyx.ecox.commands;
 
 import de.zevyx.ecox.EcoX;
 import de.zevyx.ecox.api.EcoXAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,6 +18,10 @@ public class EcoCommand implements CommandExecutor {
                 if(cs.hasPermission("ecox.info")) {
                     if(args[0].equalsIgnoreCase("info")) {
                         String pname = args[1];
+                        Bukkit.getConsoleSender().sendMessage("DEBUG EXISTS FUNCTION: " + EcoX.getInstance().getMoneyConfig().exists(pname));
+                        Bukkit.getConsoleSender().sendMessage("DEBUG USEREXISTS FUNCTION: " + EcoXAPI.getAPI().getMoneyAPI().userExistsByName(pname));
+                        Bukkit.getConsoleSender().sendMessage("DEBUG VALUE: " + EcoX.getInstance().getMoneyConfig().getValue(pname));
+                        Bukkit.getConsoleSender().sendMessage("DEBUG BALANCE: " + EcoX.getInstance().getMoneyConfig().getValue(pname + ".balance"));
                         if(EcoXAPI.getAPI().getMoneyAPI().userExistsByName(pname)) {
                             EcoXAPI.getAPI().getPluginUtils().getPlayerEcoInfo(cs, pname);
                         } else

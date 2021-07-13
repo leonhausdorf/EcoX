@@ -1,6 +1,5 @@
 package de.zevyx.ecox.configs;
 
-import de.zevyx.ecox.EcoX;
 import de.zevyx.ecox.api.EcoXAPI;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -9,52 +8,41 @@ import java.io.IOException;
 
 public class MoneyConfig {
 
-    private File file;
-    private YamlConfiguration cfg;
-
-    public MoneyConfig() {
-        this.file = new File("plugins/EcoX", "money.yml");
-        this.cfg = YamlConfiguration.loadConfiguration(file);
-    }
+    private File file = new File("plugins/EcoX", "balance.yml");
+    private YamlConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
     public void initializeDefault() {
         if(!file.exists()) {
-            if(EcoX.getInstance().getSettingsConfig().wantsFile()) {
-                try {
-                    file.createNewFile();
-
-
-                } catch (IOException ex) {
-                    EcoXAPI.getAPI().getPluginUtils().sendStackTrace(ex);
-                }
+            try {
+                file.createNewFile();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                EcoXAPI.getAPI().getPluginUtils().sendStackTrace(ex);
             }
         }
     }
 
-    public File getFile() {
-        return file;
-    }
-
-    public YamlConfiguration getConfig() {
-        return cfg;
-    }
-
-    public void save() {
+    private void save() {
         try {
-            getConfig().save(getFile());
+            cfg.save(file);
         } catch (IOException ex) {
+            ex.printStackTrace();
             EcoXAPI.getAPI().getPluginUtils().sendStackTrace(ex);
         }
     }
 
     public void setValue(String path, Object value) {
-        getConfig().set(path, value);
+        cfg.set(path, value);
 
         save();
     }
 
     public Object getValue(String path) {
-        return getConfig().get(path);
+        return cfg.get(path);
+    }
+
+    public Boolean exists(String path) {
+        return cfg.getString(path) != null;
     }
 
 }

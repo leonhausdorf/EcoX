@@ -7,15 +7,10 @@ import org.bukkit.entity.Player;
 
 public class MoneyAPI {
 
-    public boolean userExists(Player p) {
-        if(wantsFile())
-            return EcoXAPI.getAPI().getMoneyFileAPI().userExists(p);
-        return false;
-    }
-
     public boolean userExistsByName(String name) {
         if(wantsFile())
-            return EcoXAPI.getAPI().getMoneyFileAPI().userExistsByName(name);
+            return EcoXAPI.getAPI().getMoneyFileAPI().userExists(name);
+
         return false;
     }
 

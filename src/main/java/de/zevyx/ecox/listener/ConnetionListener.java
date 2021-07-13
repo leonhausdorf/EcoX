@@ -11,7 +11,7 @@ public class ConnetionListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        if(!EcoXAPI.getAPI().getMoneyAPI().userExists(p))
+        if(!EcoXAPI.getAPI().getMoneyAPI().userExistsByName(p.getName()))
             EcoXAPI.getAPI().getMoneyAPI().initiateUser(p);
     }
 
