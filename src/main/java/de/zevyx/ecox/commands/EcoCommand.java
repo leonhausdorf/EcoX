@@ -15,15 +15,18 @@ public class EcoCommand implements CommandExecutor {
             if(args.length == 0)
                 EcoXAPI.getAPI().getPluginUtils().getEcoXHelp(cs);
             else if (args.length == 2) {
-                if(args[0].equalsIgnoreCase("info")) {
-                    String pname = args[1];
-                    if(EcoXAPI.getAPI().getMoneyAPI().userExistsByName(pname)) {
-
-                    } else {
-
+                if(cs.hasPermission("ecox.info")) {
+                    if(args[0].equalsIgnoreCase("info")) {
+                        String pname = args[1];
+                        if(EcoXAPI.getAPI().getMoneyAPI().userExistsByName(pname)) {
+                            EcoXAPI.getAPI().getPluginUtils().getPlayerEcoInfo(cs, pname);
+                        } else
+                            cs.sendMessage(EcoX.getInstance().getSettingsConfig().getMessage("prefix") + EcoX.getInstance().getSettingsConfig().getMessage("notexists").replaceAll("%p%", pname));
                     }
-                }
-            }
+                } else
+                    cs.sendMessage(EcoX.getInstance().getSettingsConfig().getMessage("prefix") + EcoX.getInstance().getSettingsConfig().getMessage("noperms"));
+            } else
+                EcoXAPI.getAPI().getPluginUtils().getEcoXHelp(cs);
         }
         return false;
     }

@@ -26,10 +26,14 @@ public class SettingsConfig {
                 file.createNewFile();
 
                 setValue("autoupdate", true);
+                setValue("logging", true);
                 setValue("storage", "file");
 
 
-                setValue("messages.prefix", "");
+                setValue("messages.prefix", "&6&lEcoX &8| &f");
+                setValue("messages.currency", "Coins");
+                setValue("messages.noperms", "You don't have enough permissions to execute this command.");
+                setValue("messages.notexists", "The Player &b%p% &fdoes not exists.");
             } catch (IOException ex) {
                 EcoXAPI.getAPI().getPluginUtils().sendStackTrace(ex);
             }
@@ -62,12 +66,20 @@ public class SettingsConfig {
         return getConfig().get(path);
     }
 
+    public String getMessage(String path) {
+        return getConfig().getString("messages." + path).replaceAll("&", "§");
+    }
+
     public Boolean wantsFile() {
         return getValue("storage") == "file";
     }
 
     public Boolean wantsDatabase() {
         return getValue("storage") == "database";
+    }
+
+    public Boolean loggingActive() {
+        return getConfig().getBoolean("logging");
     }
 
 
