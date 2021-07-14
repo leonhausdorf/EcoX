@@ -37,7 +37,7 @@ public class PluginUtils {
         c.sendMessage("§f§l§m--------------- §r§b§lInformation §f§l§m---------------");
         c.sendMessage(" ");
         c.sendMessage("§b§lPlayer §8| §f" + name);
-        c.sendMessage("§b§lUUID §8| §f" + EcoX.getInstance().getMoneyConfig().getValue(name));
+        c.sendMessage("§b§lUUID §8| §f" + EcoX.getInstance().getMoneyConfig().getValue(name + ".uuid"));
         c.sendMessage(" ");
         c.sendMessage("§b§lBalance §8| §f" + EcoXAPI.getAPI().getMoneyAPI().getMoney(name) + " " + EcoX.getInstance().getSettingsConfig().getMessage("currency"));
         c.sendMessage("§b§lFirst Transaction §8| §f" + EcoX.getInstance().getMoneyConfig().getValue(name + ".firsttransaction"));

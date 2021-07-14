@@ -74,7 +74,11 @@ public class SettingsConfig {
     }
 
     public Boolean wantsFile() {
-        return getValue("storage") == "file";
+        return getString("storage").equalsIgnoreCase("file");
+    }
+
+    public String getString(String path) {
+        return cfg.getString(path);
     }
 
     public Boolean wantsDatabase() {

@@ -9,7 +9,7 @@ public class MoneyAPI {
 
     public boolean userExistsByName(String name) {
         if(wantsFile())
-            return EcoXAPI.getAPI().getMoneyFileAPI().userExists(name);
+            return EcoX.getInstance().getMoneyConfig().exists(name);
 
         return false;
     }

@@ -13,8 +13,12 @@ public class MoneyFileAPI {
     }
 
     public void initiateUser(Player p) {
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        Date now = new Date();
 
+        EcoX.getInstance().getMoneyConfig().setValue(p.getName() + ".uuid", p.getUniqueId().toString());
         EcoX.getInstance().getMoneyConfig().setValue(p.getName() + ".balance", 0);
+        EcoX.getInstance().getMoneyConfig().setValue(p.getName() + ".first_transaction", format.format(now));
     }
 
     public void setMoney(String name, Integer amount) {
